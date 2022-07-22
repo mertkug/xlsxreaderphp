@@ -1,30 +1,10 @@
 <?php
 
-require 'vendor/autoload.php';
+require_once 'vendor/autoload.php';
+use \Convertio\Convertio;
 
-use PhpOffice\PhpSpreadsheet\Reader\Xls;
-use PhpOffice\PhpSpreadsheet\Reader\Xlsx;
-use \PhpOffice\PhpSpreadsheet\Writer\Csv;
+$API = new Convertio("36fd8c173d1435176ae18fb015f07f1b");
 
-$filename = "Example2.xlsx";
-$extension = pathinfo($filename, PATHINFO_EXTENSION);
-
-if('xls' == $extension) {
-    $reader = new Xls();
-} else
-    $reader = new Xlsx();
-
-
-$spreadsheet = $reader->load($filename);
-
-
-$loadedSheetNames = $spreadsheet->getSheetNames();
-
-$writer = new Csv($spreadsheet);
-
-foreach($loadedSheetNames as $sheetIndex => $loadedSheetName) {
-    $writer->setSheetIndex($sheetIndex);
-    $writer->save($loadedSheetName.'.csv');
-}
-
-
+$API->start('./Example.xls', 'csv')   // Convert (Render) HTML Page to PNG
+->wait()                                          // Wait for conversion finish
+->download('./google.csv');                        // Download Result To Local File

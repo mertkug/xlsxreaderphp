@@ -10,6 +10,6 @@
     }
   ],
   "require": {
-    "phpoffice/phpspreadsheet": "*"
+    "convertio/convertio-php": "^0.4.0"
   }
 }
